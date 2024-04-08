@@ -91,28 +91,43 @@ LeftFarm2:AddDropdown('MyDropdown', {
         TagZone = Value
     end
 })
-
+local EdgeCFrame = {
+    [1] = CFrame.new(-16000, 389.049988, -88.4000015, -1, 0, 0, 0, 1, 0, 0, 0, -1),
+    [2] = CFrame.new(1.83587829e-07, 389.049988, -88.4000015, -1, 0, 0, 0, 1, 0, 0, 0, -1),
+    [3] = CFrame.new(15999.9844, 389.049988, -88.4000015, -1, 0, 0, 0, 1, 0, 0, 0, -1),
+    [4] = CFrame.new(32000, 389.049988, -88.4000015, -1, 0, 0, 0, 1, 0, 0, 0, -1),
+    [5] = CFrame.new(48001.1172, 389.050262, -88.3995285, -1, 0, 0, 0, 1, 0, 0, 0, -1),
+    [6] = CFrame.new(64000, 385.550293, -88.3991394, -1, 0, 0, 0, 1, 0, 0, 0, -1),
+}
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[1]
 LeftFarm2:AddToggle('MyToggle', {
     Text = 'This is a toggle',
-    Default = true, -- Default value (true / false)
+    Default = false, -- Default value (true / false)
     Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
 
     Callback = function(Value)
         _G.AutoFarmZone = Value
-
-        local tag = game:GetService("Workspace").Map.Zones["1"]
-        for i,v in pairs(tag:GetChildren()) do
-            if v.Name == TagZone then
-                if _G.AutoFarmZone then
-                    if v.Name == "Edge" then
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
-                    end
+        if _G.AutoFarmZone then
+            while wait(2) do
+                if TagZone == "1" then
+                rootpart.CFrame = EdgeCFrame[1]
+                elseif TagZone == "2" then
+                    rootpart.CFrame = EdgeCFrame[2]
+                    elseif TagZone == "3" then
+                        rootpart.CFrame = EdgeCFrame[3]
+                        elseif TagZone == "4" then
+                            rootpart.CFrame = EdgeCFrame[4]
+                            elseif TagZone == "5" then
+                                rootpart.CFrame = EdgeCFrame[5]
+                                elseif TagZone == "6" then
+                                    rootpart.CFrame = EdgeCFrame[6]
+                                                    
                 end
             end
         end
+        
     end
 })
-
 
 Plr = {}
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
@@ -206,14 +221,3 @@ end
 end
     end
 })
-
-spawn(function()
-    while wait() do
-        if _G.Loop ~= true then
-            local PartLeg = game:GetService("Workspace"):FindFirstChild("PartLeg")
-    if PartLeg then
-        PartLeg:Destroy()
-    end
-        end
-    end
-end)
