@@ -42,7 +42,7 @@ local Window = Library:CreateWindow({
 
 local Tabs = {
     -- Creates a new tab titled Main
-    Main = Window:AddTab('Main'),
+    Main = Window:AddTab('Teleport'),
     ['UI Settings'] = Window:AddTab('UI Settings'),
 }
 local LeftGroupBox = Tabs.Main:AddLeftGroupbox('Main')
@@ -66,6 +66,22 @@ LeftGroupBox:AddDropdown('MyDropdown', {
         PlayerTP = t
     end
 })
+local modeList = {
+    [1] = "Bypass",
+    [2] = "Tween",
+}
+LeftGroupBox:AddDropdown('MyDropdown', {
+    Values = modeList,
+    Default = 1,
+    Multi = false, 
+
+    Text = 'Select Mode',
+    Tooltip = 'Select Mode', 
+
+    Callback = function(t)
+        modeTP = t
+    end
+})
 
 LeftGroupBox:AddToggle('MyToggle', {
     Text = 'Teleport',
@@ -77,11 +93,47 @@ LeftGroupBox:AddToggle('MyToggle', {
         local target = game.Players[PlayerTP]
     local targetChar = target.Character or target.CharacterAdded:Wait()
     local targetrootpart = targetChar:FindFirstChild("HumanoidRootPart") 
+    if modeTP == "Bypass" then
     pcall(function()
         while _G.Loop do task.wait()
             rootpart.CFrame = targetrootpart.CFrame * CFrame.new(0,7,0)
             Part1()
         end
+    end)   
+end
+if modeTP == "Tween" then
+    local TweenService  = game:GetService("TweenService")
+local noclipE       = false
+local antifall      = false
+
+local function noclip()
+    for i, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+        if v:IsA("BasePart") and v.CanCollide == true then
+            v.CanCollide = false
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,0,0)
+        end
+    end
+end
+
+local function moveto(obj, speed)
+    local info = TweenInfo.new(((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - obj.Position).Magnitude)/ speed,Enum.EasingStyle.Linear)
+    local tween = TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, info, {CFrame = obj})
+
+    if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
+        antifall = Instance.new("BodyVelocity", game.Players.LocalPlayer.Character.HumanoidRootPart)
+        antifall.Velocity = Vector3.new(0,0,0)
+        noclipE = game:GetService("RunService").Stepped:Connect(noclip)
+        tween:Play()
+    end
+        
+    tween.Completed:Connect(function()
+        antifall:Destroy()
+        noclipE:Disconnect()
     end)
+end
+
+moveto(targetrootpart.CFrame * CFrame.new(0,7,0) + Vector3.new(0,0,0), 100)
+game:GetService("VirtualUser"):ClickButton1(Vector2.new(9e9, 9e9))
+end
     end
 })
