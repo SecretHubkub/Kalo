@@ -103,22 +103,22 @@ local MyButton = LeftFarm2:AddButton({
     Text = 'Farm',
     Func = function()
         if TagZone == "1" then
-            rootpart.CFrame = EdgeCFrame[1]
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[1]
         end
             if TagZone == "2" then
-                rootpart.CFrame = EdgeCFrame[2]
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[2]
             end
                 if TagZone == "3" then
-                    rootpart.CFrame = EdgeCFrame[3]
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[3]
                 end
                     if TagZone == "4" then
-                        rootpart.CFrame = EdgeCFrame[4]
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[4]
                     end
                         if TagZone == "5" then
-                            rootpart.CFrame = EdgeCFrame[5]
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[5]
                         end
                             if TagZone == "6" then
-                                rootpart.CFrame = EdgeCFrame[6]
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[6]
                                                 
         end
     end,
