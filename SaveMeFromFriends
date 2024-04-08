@@ -42,19 +42,85 @@ local Window = Library:CreateWindow({
 
 local Tabs = {
     -- Creates a new tab titled Main
-    Main = Window:AddTab('Teleport'),
+    Farm = Window:AddTab('/%%/Main/%%/'),
+    Teleport = Window:AddTab('Teleport'),
     ['UI Settings'] = Window:AddTab('UI Settings'),
 }
-local LeftGroupBox = Tabs.Main:AddLeftGroupbox('Main')
+local LeftGroupBox = Tabs.Teleport:AddLeftGroupbox('Main')
+local LeftFarm = Tabs.Farm:AddLeftGroupbox('Tap1')
+local LeftFarm2 = Tabs.Farm:AddLeftGroupbox('Tap2')
+
+local TabBox = Tabs.Teleport:AddLeftTabbox() 
+local TabBox2 = Tabs.Farm:AddLeftTabbox() 
+
+LeftFarm:AddToggle('MyToggle', {
+    Text = 'Farm Power',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Click to Farm', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        _G.CoinFarm = Value
+        while wait() do
+            repeat task.wait()
+                for i,v in pairs(game:GetService("Workspace").Effects:GetChildren()) do
+                    if v.Name == "Template" then
+                        v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                    end
+                end
+            until _G.CoinFarm == false
+        end
+    end
+})
+local ZoneList = {
+    [1] = "1",
+    [2] = "2",
+    [3] = "3",
+    [4] = "4",
+    [5] = "5",
+    [6] = "6",
+}
+LeftFarm2:AddDropdown('MyDropdown', {
+    Values = ZoneList,
+    Default = 1, -- number index of the value / string
+    Multi = false, -- true / false, allows multiple choices to be selected
+
+    Text = 'Select Zone',
+    Tooltip = 'Click to Select', -- Information shown when you hover over the dropdown
+
+    Callback = function(Value)
+        TagZone = Value
+    end
+})
+
+LeftFarm2:AddToggle('MyToggle', {
+    Text = 'This is a toggle',
+    Default = true, -- Default value (true / false)
+    Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
+
+    Callback = function(Value)
+        _G.AutoFarmZone = Value
+
+        local tag = game:GetService("Workspace").Map.Zones["1"]
+        for i,v in pairs(tag:GetChildren()) do
+            if v.Name == TagZone then
+                if _G.AutoFarmZone then
+                    if v.Name == "Edge" then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+                    end
+                end
+            end
+        end
+    end
+})
 
 
-local TabBox = Tabs.Main:AddLeftTabbox() 
 Plr = {}
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
-    table.insert(Plr,v.Name) 
+     table.insert(Plr,v.Name) 
 end
 
-LeftGroupBox:AddDropdown('MyDropdown', {
+
+LeftGroupBox:AddDropdown('PlayersDropdown', {
     Values = Plr,
     Default = 1,
     Multi = false, 
@@ -66,6 +132,7 @@ LeftGroupBox:AddDropdown('MyDropdown', {
         PlayerTP = t
     end
 })
+
 local modeList = {
     [1] = "Bypass",
     [2] = "Tween",
@@ -139,3 +206,14 @@ end
 end
     end
 })
+
+spawn(function()
+    while wait() do
+        if _G.Loop ~= true then
+            local PartLeg = game:GetService("Workspace"):FindFirstChild("PartLeg")
+    if PartLeg then
+        PartLeg:Destroy()
+    end
+        end
+    end
+end)
