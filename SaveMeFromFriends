@@ -99,33 +99,37 @@ local EdgeCFrame = {
     [5] = CFrame.new(48001.1172, 389.050262, -88.3995285, -1, 0, 0, 0, 1, 0, 0, 0, -1) * CFrame.new(0,3,0),
     [6] = CFrame.new(64000, 385.550293, -88.3991394, -1, 0, 0, 0, 1, 0, 0, 0, -1) * CFrame.new(0,3,0),
 }
-local MyButton = LeftFarm2:AddButton({
-    Text = 'Farm',
-    Func = function()
-        if TagZone == "1" then
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[1]
-        end
-            if TagZone == "2" then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[2]
-            end
-                if TagZone == "3" then
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[3]
-                end
-                    if TagZone == "4" then
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[4]
-                    end
-                        if TagZone == "5" then
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[5]
-                        end
-                            if TagZone == "6" then
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[6]
-                                                
-        end
-    end,
-    DoubleClick = false,
-    Tooltip = 'This is the main button'
-})
+LeftGroupBox:AddToggle('MyToggle', {
+    Text = 'Teleport',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Click to Teleport',
 
+    Callback = function(t)
+        _G.FarmZone = t
+
+        while _G.FarmZone do wait()
+            if TagZone == "1" then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[1]
+            end
+                if TagZone == "2" then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[2]
+                end
+                    if TagZone == "3" then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[3]
+                    end
+                        if TagZone == "4" then
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[4]
+                        end
+                            if TagZone == "5" then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[5]
+                            end
+                                if TagZone == "6" then
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[6]
+                                                    
+            end
+        end
+    end
+})
 Plr = {}
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
      table.insert(Plr,v.Name) 
