@@ -99,34 +99,26 @@ local EdgeCFrame = {
     [5] = CFrame.new(48001.1172, 389.050262, -88.3995285, -1, 0, 0, 0, 1, 0, 0, 0, -1),
     [6] = CFrame.new(64000, 385.550293, -88.3991394, -1, 0, 0, 0, 1, 0, 0, 0, -1),
 }
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[1]
-LeftFarm2:AddToggle('MyToggle', {
-    Text = 'This is a toggle',
-    Default = false, -- Default value (true / false)
-    Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
-
-    Callback = function(Value)
-        _G.AutoFarmZone = Value
-        if _G.AutoFarmZone then
-            while wait(2) do
-                if TagZone == "1" then
-                rootpart.CFrame = EdgeCFrame[1]
-                elseif TagZone == "2" then
-                    rootpart.CFrame = EdgeCFrame[2]
-                    elseif TagZone == "3" then
-                        rootpart.CFrame = EdgeCFrame[3]
-                        elseif TagZone == "4" then
-                            rootpart.CFrame = EdgeCFrame[4]
-                            elseif TagZone == "5" then
-                                rootpart.CFrame = EdgeCFrame[5]
-                                elseif TagZone == "6" then
-                                    rootpart.CFrame = EdgeCFrame[6]
-                                                    
-                end
-            end
+local MyButton = LeftFarm2:AddButton({
+    Text = 'Farm',
+    Func = function()
+        if TagZone == "1" then
+            rootpart.CFrame = EdgeCFrame[1]
+            elseif TagZone == "2" then
+                rootpart.CFrame = EdgeCFrame[2]
+                elseif TagZone == "3" then
+                    rootpart.CFrame = EdgeCFrame[3]
+                    elseif TagZone == "4" then
+                        rootpart.CFrame = EdgeCFrame[4]
+                        elseif TagZone == "5" then
+                            rootpart.CFrame = EdgeCFrame[5]
+                            elseif TagZone == "6" then
+                                rootpart.CFrame = EdgeCFrame[6]
+                                                
         end
-        
-    end
+    end,
+    DoubleClick = false,
+    Tooltip = 'This is the main button'
 })
 
 Plr = {}
