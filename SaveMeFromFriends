@@ -42,7 +42,7 @@ local Window = Library:CreateWindow({
 
 local Tabs = {
     -- Creates a new tab titled Main
-    Farm = Window:AddTab('/%%/Main/%%/'),
+    Farm = Window:AddTab('Main'),
     Teleport = Window:AddTab('Teleport'),
     ['UI Settings'] = Window:AddTab('UI Settings'),
 }
@@ -54,7 +54,7 @@ local TabBox = Tabs.Teleport:AddLeftTabbox()
 local TabBox2 = Tabs.Farm:AddLeftTabbox() 
 
 LeftFarm:AddToggle('MyToggle', {
-    Text = 'Farm Power',
+    Text = '%%-Auto Farm Power-%%',
     Default = false, -- Default value (true / false)
     Tooltip = 'Click to Farm', -- Information shown when you hover over the toggle
 
@@ -99,35 +99,39 @@ local EdgeCFrame = {
     [5] = CFrame.new(48001.1172, 389.050262, -88.3995285, -1, 0, 0, 0, 1, 0, 0, 0, -1) * CFrame.new(0,3,0),
     [6] = CFrame.new(64000, 385.550293, -88.3991394, -1, 0, 0, 0, 1, 0, 0, 0, -1) * CFrame.new(0,3,0),
 }
-LeftGroupBox:AddToggle('MyToggle', {
-    Text = 'Teleport',
+LeftFarm2:AddToggle('MyToggle', {
+    Text = '%%-Auto Farm Zone-%%',
     Default = false, -- Default value (true / false)
     Tooltip = 'Click to Teleport',
 
     Callback = function(t)
         _G.FarmZone = t
 
-        while _G.FarmZone do wait()
-            if TagZone == "1" then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[1]
-            end
-                if TagZone == "2" then
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[2]
+        repeat
+            task.wait()
+            while _G.FarmZone do wait()
+                if TagZone == "1" then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[1]
                 end
-                    if TagZone == "3" then
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[3]
+                    if TagZone == "2" then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[2]
                     end
-                        if TagZone == "4" then
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[4]
+                        if TagZone == "3" then
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[3]
                         end
-                            if TagZone == "5" then
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[5]
+                            if TagZone == "4" then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[4]
                             end
-                                if TagZone == "6" then
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[6]
-                                                    
+                                if TagZone == "5" then
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[5]
+                                end
+                                    if TagZone == "6" then
+                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[6]
+                                                        
+                end
             end
-        end
+        until hum.Health == 0
+
     end
 })
 Plr = {}
