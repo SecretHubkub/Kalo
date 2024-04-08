@@ -131,9 +131,11 @@ local function moveto(obj, speed)
         noclipE:Disconnect()
     end)
 end
-
-moveto(targetrootpart.CFrame * CFrame.new(0,7,0) + Vector3.new(0,0,0), 100)
+while _G.Loop do task.wait()
+    moveto(targetrootpart.CFrame * CFrame.new(0,7,0) + Vector3.new(0,0,0), 100)
 game:GetService("VirtualUser"):ClickButton1(Vector2.new(9e9, 9e9))
+Part1()
+end
 end
     end
 })
