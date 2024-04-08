@@ -1,0 +1,87 @@
+if not game:IsLoaded() then 
+    repeat game.Loaded:Wait()
+    until game:IsLoaded()
+end
+game.StarterGui:SetCore("SendNotification",{
+    Icon = "http://www.roblox.com/asset/?id=";
+    Title = "System";
+    Text = "GameRunning!";
+    Duration = 5;
+})
+local p = game.Players.LocalPlayer
+local Char = p.Character or p.CharacterAdded:Wait() 
+local rootpart = Char:FindFirstChild("HumanoidRootPart")
+local hum = Char:FindFirstChild("Humanoid")
+
+local PartLeg = game:GetService("Workspace"):FindFirstChild("PartLeg")
+    if PartLeg then
+        PartLeg:Destroy()
+    end
+local Part = Instance.new("Part",workspace)
+Part.Name = "PartLeg"
+Part.CanCollide = true
+Part.Anchored = true
+Part.Transparency = 0
+Part.Size = Vector3.new(15,0.2,15)
+function Part1()
+    game:GetService("Workspace"):FindFirstChild("PartLeg").CFrame = rootpart.CFrame * CFrame.new(0,-3,0)
+end
+local repo = 'https://raw.githubusercontent.com/THU9DEV/LinoriaLib/main/'
+
+local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
+local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
+local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
+
+local Window = Library:CreateWindow({
+    Title = 'Xser',
+    Center = true,
+    AutoShow = true,
+    TabPadding = 8,
+    MenuFadeTime = 0.2
+})
+
+local Tabs = {
+    -- Creates a new tab titled Main
+    Main = Window:AddTab('Main'),
+    ['UI Settings'] = Window:AddTab('UI Settings'),
+}
+local LeftGroupBox = Tabs.Main:AddLeftGroupbox('Main')
+
+
+local TabBox = Tabs.Main:AddLeftTabbox() 
+Plr = {}
+for i,v in pairs(game:GetService("Players"):GetChildren()) do
+    table.insert(Plr,v.Name) 
+end
+
+LeftGroupBox:AddDropdown('MyDropdown', {
+    Values = Plr,
+    Default = 1,
+    Multi = false, 
+
+    Text = 'Select Player',
+    Tooltip = 'Select Target', 
+
+    Callback = function(t)
+        PlayerTP = t
+    end
+})
+
+LeftGroupBox:AddToggle('MyToggle', {
+    Text = 'Teleport',
+    Default = false, -- Default value (true / false)
+    Tooltip = 'Click to Teleport',
+
+    Callback = function(t)
+        _G.Loop = t
+        local target = game.Players[PlayerTP]
+    local targetChar = target.Character or target.CharacterAdded:Wait()
+    local targetrootpart = targetChar:FindFirstChild("HumanoidRootPart") 
+    pcall(function()
+        while _G.Loop do task.wait()
+            rootpart.CFrame = targetrootpart.CFrame * CFrame.new(0,7,0)
+            Part1()
+        end
+    end)
+    end
+})
