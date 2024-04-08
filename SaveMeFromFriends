@@ -104,15 +104,20 @@ local MyButton = LeftFarm2:AddButton({
     Func = function()
         if TagZone == "1" then
             rootpart.CFrame = EdgeCFrame[1]
-            elseif TagZone == "2" then
+        end
+            if TagZone == "2" then
                 rootpart.CFrame = EdgeCFrame[2]
-                elseif TagZone == "3" then
+            end
+                if TagZone == "3" then
                     rootpart.CFrame = EdgeCFrame[3]
-                    elseif TagZone == "4" then
+                end
+                    if TagZone == "4" then
                         rootpart.CFrame = EdgeCFrame[4]
-                        elseif TagZone == "5" then
+                    end
+                        if TagZone == "5" then
                             rootpart.CFrame = EdgeCFrame[5]
-                            elseif TagZone == "6" then
+                        end
+                            if TagZone == "6" then
                                 rootpart.CFrame = EdgeCFrame[6]
                                                 
         end
