@@ -1,1 +1,61 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Title of the library", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+local Tab = Window:MakeTab({
+	Name = "assasin",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
 
+local Section = Tab:AddSection({
+	Name = "assasin"
+})
+
+local plr = {}
+local player = nil
+for i,v in pairs(game:GetService("Players"):GetChildren()) do
+    table.insert(plr,v.Name)
+end
+
+
+Tab:AddDropdown({
+	Name = "Select player",
+	Default = "1",
+	Options = plr,
+	Callback = function(Value)
+		player = Value
+	end    
+})
+
+
+Tab:AddToggle({
+	Name = "tp to player",
+	Default = false,
+	Callback = function(Value)
+        _G.Autotp = Value
+        while _G.Autotp do wait()
+		    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[player].Character.HumanoidRootPart.CFrame*CFrame.new(0,0,2)
+        end
+	end    
+})
+
+
+Tab:AddToggle({
+	Name = "Auto Punch",
+	Default = false,
+	Callback = function(Value)
+		_G.Auto_punch = Value
+        while _G.Auto_punch do wait()
+            local equip = false
+			
+			local combat = "Combat"
+            if game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").fameshop0828.Backpack:FindFirstChild(combat)) then
+				local equip = true
+            	local args = {
+                	[1] = "ChargeButton"
+            	}
+            
+            	game:GetService("ReplicatedStorage"):WaitForChild("MainEvent"):FireServer(unpack(args))
+			end
+        end
+	end
+})
