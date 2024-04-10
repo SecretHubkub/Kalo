@@ -2,227 +2,82 @@ if not game:IsLoaded() then
     repeat game.Loaded:Wait()
     until game:IsLoaded()
 end
-game.StarterGui:SetCore("SendNotification",{
-    Icon = "http://www.roblox.com/asset/?id=";
-    Title = "System";
-    Text = "GameRunning!";
-    Duration = 5;
-})
-local p = game.Players.LocalPlayer
-local Char = p.Character or p.CharacterAdded:Wait() 
-local rootpart = Char:FindFirstChild("HumanoidRootPart")
-local hum = Char:FindFirstChild("Humanoid")
+if game.PlaceId == 142823291 then
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/vozoid/ui-libraries/main/drawing/void/source.lua"))()
 
-local PartLeg = game:GetService("Workspace"):FindFirstChild("PartLeg")
-    if PartLeg then
-        PartLeg:Destroy()
-    end
-local Part = Instance.new("Part",workspace)
-Part.Name = "PartLeg"
-Part.CanCollide = true
-Part.Anchored = true
-Part.Transparency = 0
-Part.Size = Vector3.new(15,0.2,15)
-function Part1()
-    game:GetService("Workspace"):FindFirstChild("PartLeg").CFrame = rootpart.CFrame * CFrame.new(0,-3,0)
-end
-local repo = 'https://raw.githubusercontent.com/THU9DEV/LinoriaLib/main/'
+local watermark = library:Watermark(" MM2 | Infinity Support | v1 | dev")
 
-local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
-local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
-local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
-
-local Window = Library:CreateWindow({
-    Title = 'Xser',
-    Center = true,
-    AutoShow = true,
-    TabPadding = 8,
-    MenuFadeTime = 0.2
-})
-
-local Tabs = {
-    -- Creates a new tab titled Main
-    Farm = Window:AddTab('Main'),
-    Teleport = Window:AddTab('Teleport'),
-    ['UI Settings'] = Window:AddTab('UI Settings'),
+local main = library:Load{
+    Name = "Infinity Hub",
+    SizeX = 600,
+    SizeY = 650,
+    Theme = "Midnight",
+    Extension = "json",
+    Folder = "Infinity Hub"
 }
-local LeftGroupBox = Tabs.Teleport:AddLeftGroupbox('Main')
-local LeftFarm = Tabs.Farm:AddLeftGroupbox('Tap1')
-local LeftFarm2 = Tabs.Farm:AddLeftGroupbox('Tap2')
 
-local TabBox = Tabs.Teleport:AddLeftTabbox() 
-local TabBox2 = Tabs.Farm:AddLeftTabbox() 
 
-LeftFarm:AddToggle('MyToggle', {
-    Text = '%%-Auto Farm Power-%%',
-    Default = false, -- Default value (true / false)
-    Tooltip = 'Click to Farm', -- Information shown when you hover over the toggle
+local tab = main:Tab("Main")
 
-    Callback = function(Value)
-        _G.CoinFarm = Value
-        while wait() do
-            repeat task.wait()
-                for i,v in pairs(game:GetService("Workspace").Effects:GetChildren()) do
-                    if v.Name == "Template" then
-                        v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-                    end
-                end
-            until _G.CoinFarm == false
-        end
-    end
-})
-local ZoneList = {
-    [1] = "1",
-    [2] = "2",
-    [3] = "3",
-    [4] = "4",
-    [5] = "5",
-    [6] = "6",
+local section = tab:Section{
+    Name = "Main Killer",
+    Side = "Left"
 }
-LeftFarm2:AddDropdown('MyDropdown', {
-    Values = ZoneList,
-    Default = 1, -- number index of the value / string
-    Multi = false, -- true / false, allows multiple choices to be selected
 
-    Text = 'Select Zone',
-    Tooltip = 'Click to Select', -- Information shown when you hover over the dropdown
+local label = section:Label("Bring Players")
 
-    Callback = function(Value)
-        TagZone = Value
+section:Slider{
+    Text = "[value]/10",
+    Min = -10,
+    Max = 10,
+    Float = 0.25,
+    Flag = "Dis Player",
+    Callback = function(nu)
+        number = nu
     end
-})
-local EdgeCFrame = {
-    [1] = CFrame.new(-16000, 389.049988, -88.4000015, -1, 0, 0, 0, 1, 0, 0, 0, -1) * CFrame.new(0,3,0),
-    [2] = CFrame.new(1.83587829e-07, 389.049988, -88.4000015, -1, 0, 0, 0, 1, 0, 0, 0, -1) * CFrame.new(0,3,0),
-    [3] = CFrame.new(15999.9844, 389.049988, -88.4000015, -1, 0, 0, 0, 1, 0, 0, 0, -1) * CFrame.new(0,3,0),
-    [4] = CFrame.new(32000, 389.049988, -88.4000015, -1, 0, 0, 0, 1, 0, 0, 0, -1) * CFrame.new(0,3,0),
-    [5] = CFrame.new(48001.1172, 389.050262, -88.3995285, -1, 0, 0, 0, 1, 0, 0, 0, -1) * CFrame.new(0,3,0),
-    [6] = CFrame.new(64000, 385.550293, -88.3991394, -1, 0, 0, 0, 1, 0, 0, 0, -1) * CFrame.new(0,3,0),
 }
-LeftFarm2:AddToggle('MyToggle', {
-    Text = '%%-Auto Farm Zone-%%',
-    Default = false, -- Default value (true / false)
-    Tooltip = 'Click to Teleport',
 
-    Callback = function(t)
-        _G.FarmZone = t
 
-        repeat
-            task.wait()
-            while _G.FarmZone do wait()
-                if TagZone == "1" then
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[1]
-                end
-                    if TagZone == "2" then
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[2]
-                    end
-                        if TagZone == "3" then
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[3]
-                        end
-                            if TagZone == "4" then
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[4]
-                            end
-                                if TagZone == "5" then
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[5]
-                                end
-                                    if TagZone == "6" then
-                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = EdgeCFrame[6]
-                                                        
-                end
-            end
-        until hum.Health == 0
-
-    end
-})
 Plr = {}
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
-     table.insert(Plr,v.Name) 
+    table.insert(Plr,v.Name) 
 end
-
-
-LeftGroupBox:AddDropdown('PlayersDropdown', {
-    Values = Plr,
-    Default = 1,
-    Multi = false, 
-
-    Text = 'Select Player',
-    Tooltip = 'Select Target', 
-
-    Callback = function(t)
+local dropdown = section:Dropdown{Content = Plr,Flag = "Dropdown",Callback = function(t)
         PlayerTP = t
-    end
-})
-
-local modeList = {
-    [1] = "Bypass",
-    [2] = "Tween",
+end
 }
-LeftGroupBox:AddDropdown('MyDropdown', {
-    Values = modeList,
-    Default = 1,
-    Multi = false, 
-
-    Text = 'Select Mode',
-    Tooltip = 'Select Mode', 
-
-    Callback = function(t)
-        modeTP = t
+section:Button{
+    Name = "Refresh Dropdown",
+    Callback  = function()
+        dropdown:Refresh(Plr)
     end
-})
+}
 
-LeftGroupBox:AddToggle('MyToggle', {
-    Text = 'Teleport',
-    Default = false, -- Default value (true / false)
-    Tooltip = 'Click to Teleport',
-
-    Callback = function(t)
-        _G.Loop = t
-        local target = game.Players[PlayerTP]
-    local targetChar = target.Character or target.CharacterAdded:Wait()
-    local targetrootpart = targetChar:FindFirstChild("HumanoidRootPart") 
-    if modeTP == "Bypass" then
+section:Toggle{
+    Name = "Bring Player",
+    Flag = "Toggle",
+    Callback  = function(state)
+        _G.SD = state
+Target = PlayerTP -- Name
+NOW = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+wait()
+game.Workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character
+game.Players.LocalPlayer.Character.Animate.Disabled = true
+wait()
+game.Players.LocalPlayer.Character.Animate.Disabled = false
+while _G.SD do wait()
     pcall(function()
-        while _G.Loop do task.wait()
-            rootpart.CFrame = targetrootpart.CFrame * CFrame.new(0,7,0)
-            Part1()
-        end
-    end)   
-end
-if modeTP == "Tween" then
-    local TweenService  = game:GetService("TweenService")
-local noclipE       = false
-local antifall      = false
-
-local function noclip()
-    for i, v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
-        if v:IsA("BasePart") and v.CanCollide == true then
-            v.CanCollide = false
-            game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,0,0)
-        end
+game.Players[Target].Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,0,number)
+for i,v in pairs(game.Players:FindFirstChild(Target).Character:GetChildren()) do
+if v.ClassName == "Part" then
+       v.CanCollide = false
     end
 end
-
-local function moveto(obj, speed)
-    local info = TweenInfo.new(((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - obj.Position).Magnitude)/ speed,Enum.EasingStyle.Linear)
-    local tween = TweenService:Create(game.Players.LocalPlayer.Character.HumanoidRootPart, info, {CFrame = obj})
-
-    if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
-        antifall = Instance.new("BodyVelocity", game.Players.LocalPlayer.Character.HumanoidRootPart)
-        antifall.Velocity = Vector3.new(0,0,0)
-        noclipE = game:GetService("RunService").Stepped:Connect(noclip)
-        tween:Play()
-    end
-        
-    tween.Completed:Connect(function()
-        antifall:Destroy()
-        noclipE:Disconnect()
-    end)
+end)
 end
-while _G.Loop do task.wait()
-    moveto(targetrootpart.CFrame * CFrame.new(0,7,0) + Vector3.new(0,0,0), 100)
-game:GetService("VirtualUser"):ClickButton1(Vector2.new(9e9, 9e9))
-Part1()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = NOW
 end
+}
+else
+    game.Players.LocalPlayer:Kick("Not MM2")
 end
-    end
-})
