@@ -15,6 +15,7 @@ spawn(function()
                                 fireproximityprompt(v,30)
                             end
                         end
+                        if game:GetService("Players").LocalPlayer.PlayerGui.Quest.QuestMain.visible == true then
 
                             for i,v in pairs(game:GetService("Workspace")["_Mob"]:GetDescendants()) do
                                 if v.Name == "Pirate" then
@@ -26,6 +27,7 @@ spawn(function()
                                         until v.Humanoid.Health <= 0
                                 end
                             end
+                        end
                     elseif level >= 20 then  -- เปลี่ยนเป็น elseif เพื่อลดการทำซ้ำ
                         for i,v in pairs(game:GetService("Workspace").Quest.Starter.QuestBoard["Pirate Captain"]:Getchildren()) do
                             if v.Name == "ProximityPrompt" then
@@ -34,14 +36,16 @@ spawn(function()
                                 fireproximityprompt(v,30)
                             end
                         end
-                        for i,v in pairs(game:GetService("Workspace")["_Mob"]:GetDescendants()) do
-                            if v.Name == "Pirate Captain" then
-                                game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Combat")) 
-                                repeat task.wait(.2)
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,5)
-                                    game:GetService('VirtualUser'):CaptureController()
-                                    game:GetService('VirtualUser'):Button1Down(Vector2.new(100,100))
-                                until v.Humanoid.Health <= 0
+                        if game:GetService("Players").LocalPlayer.PlayerGui.Quest.QuestMain.visible == true then
+                            for i,v in pairs(game:GetService("Workspace")["_Mob"]:GetDescendants()) do
+                                if v.Name == "Pirate Captain" then
+                                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Combat")) 
+                                    repeat task.wait(.2)
+                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,5)
+                                        game:GetService('VirtualUser'):CaptureController()
+                                        game:GetService('VirtualUser'):Button1Down(Vector2.new(100,100))
+                                    until v.Humanoid.Health <= 0
+                                end
                             end
                         end
                     end
