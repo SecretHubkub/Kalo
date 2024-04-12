@@ -8,35 +8,39 @@ spawn(function()
                 
                     local level = game:GetService("Players").LocalPlayer.Data.Levels.value
                     if level >= 1 and level <= 19 then  -- เปลี่ยนจาก "or" เป็น "and" เพื่อให้ทำงานถูกต้อง
-                        for i,v in pairs(game:GetService("Workspace").Quest.Starter.QuestBoard.Pirate:GetChildren()) do
-                            if v.Name == "ProximityPrompt" then
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(931.587036, 105.237534, -1379.18359, -0.310029328, 6.87911879e-08, -0.950726986, 1.57532902e-08, 1, 6.72193039e-08, 0.950726986, 5.86287729e-09, -0.310029328)
-                                wait(.2)
-                                fireproximityprompt(v,30)
+                        if game:GetService("Players").LocalPlayer.PlayerGui.Quest.QuestMain.Visible == false then
+                            for i,v in pairs(game:GetService("Workspace").Quest.Starter.QuestBoard.Pirate:GetChildren()) do
+                                if v.Name == "ProximityPrompt" then
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(931.587036, 105.237534, -1379.18359, -0.310029328, 6.87911879e-08, -0.950726986, 1.57532902e-08, 1, 6.72193039e-08, 0.950726986, 5.86287729e-09, -0.310029328)
+                                    wait(.2)
+                                    fireproximityprompt(v,30)
+                                end
                             end
-                        end
-                        if game:GetService("Players").LocalPlayer.PlayerGui.Quest.QuestMain.Visible == true then
+                        elseif game:GetService("Players").LocalPlayer.PlayerGui.Quest.QuestMain.Visible == true then
 
                             for i,v in pairs(game:GetService("Workspace")["_Mob"]:GetDescendants()) do
                                 if v.Name == "Pirate" then
                                     game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Combat")) 
-                                        repeat task.wait(.2)
-                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,5)
-                                            game:GetService('VirtualUser'):CaptureController()
-                                            game:GetService('VirtualUser'):Button1Down(Vector2.new(100,100))
-                                        until v.Humanoid.Health <= 0
+                                    repeat task.wait(.2)
+                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,5)
+                                        game:GetService('VirtualUser'):CaptureController()
+                                        game:GetService('VirtualUser'):Button1Down(Vector2.new(100,100))
+                                    until v.Humanoid.Health <= 0
                                 end
                             end
                         end
                     elseif level >= 20 then  -- เปลี่ยนเป็น elseif เพื่อลดการทำซ้ำ
-                        for i,v in pairs(game:GetService("Workspace").Quest.Starter.QuestBoard["Pirate Captain"]:Getchildren()) do
-                            if v.Name == "ProximityPrompt" then
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(931.587036, 105.237534, -1379.18359, -0.310029328, 6.87911879e-08, -0.950726986, 1.57532902e-08, 1, 6.72193039e-08, 0.950726986, 5.86287729e-09, -0.310029328)
-                                wait(.2)
-                                fireproximityprompt(v,30)
+                        if game:GetService("Players").LocalPlayer.PlayerGui.Quest.QuestMain.Visible == false then
+                            for i,v in pairs(game:GetService("Workspace").Quest.Starter.QuestBoard["Pirate Captain"]:Getchildren()) do
+                                if v.Name == "ProximityPrompt" then
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(931.587036, 105.237534, -1379.18359, -0.310029328, 6.87911879e-08, -0.950726986, 1.57532902e-08, 1, 6.72193039e-08, 0.950726986, 5.86287729e-09, -0.310029328)
+                                    wait(.2)
+                                    fireproximityprompt(v,30)
+                                end
                             end
-                        end
-                        if game:GetService("Players").LocalPlayer.PlayerGui.Quest.QuestMain.Visible == true then
+                        
+                        elseif game:GetService("Players").LocalPlayer.PlayerGui.Quest.QuestMain.Visible == true then
+                        
                             for i,v in pairs(game:GetService("Workspace")["_Mob"]:GetDescendants()) do
                                 if v.Name == "Pirate Captain" then
                                     game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Combat")) 
