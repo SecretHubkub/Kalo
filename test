@@ -15,7 +15,7 @@ spawn(function()
                                 fireproximityprompt(v,30)
                             end
                         end
-                        if game:GetService("Players").LocalPlayer.PlayerGui.Quest.QuestMain.visible == true then
+                        if game:GetService("Players").LocalPlayer.PlayerGui.Quest.QuestMain.Visible == true then
 
                             for i,v in pairs(game:GetService("Workspace")["_Mob"]:GetDescendants()) do
                                 if v.Name == "Pirate" then
@@ -36,7 +36,7 @@ spawn(function()
                                 fireproximityprompt(v,30)
                             end
                         end
-                        if game:GetService("Players").LocalPlayer.PlayerGui.Quest.QuestMain.visible == true then
+                        if game:GetService("Players").LocalPlayer.PlayerGui.Quest.QuestMain.Visible == true then
                             for i,v in pairs(game:GetService("Workspace")["_Mob"]:GetDescendants()) do
                                 if v.Name == "Pirate Captain" then
                                     game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Combat")) 
