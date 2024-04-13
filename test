@@ -41,7 +41,7 @@ local Tabs = {
                                     if v.Name == "Pirate" then
                                         game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Combat")) 
                                         repeat task.wait()
-                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame*CFrame.new(0,8,0,3,0,0,-3)
+                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame*CFrame.new(0,7.4,0,3,0,0,-3)
                                             game:GetService('VirtualUser'):CaptureController()
                                             game:GetService('VirtualUser'):Button1Down(Vector2.new(100,100))
                                         until v.Humanoid.Health <= 0
@@ -62,7 +62,7 @@ local Tabs = {
                                     if v.Name == "Pirate Captain" then
                                         game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Combat")) 
                                         repeat task.wait()
-                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame*CFrame.new(0,8,0,3,0,0,-3)
+                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame*CFrame.new(0,7.4,0,3,0,0,-3)
                                             game:GetService('VirtualUser'):CaptureController()
                                             game:GetService('VirtualUser'):Button1Down(Vector2.new(100,100))
                                         until v.Humanoid.Health <= 0
