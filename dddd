@@ -1,0 +1,40 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Secret Hub | Meme Sea", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+local Tab = Window:MakeTab({
+	Name = "Tab 1",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Section"
+})
+
+Tab:AddToggle({
+	Name = "This is a toggle!",
+	Default = false,
+	Callback = function(Value)
+		_G.k = Value
+        task.spawn(function()
+            while _G.k do task.wait()
+                if _G.k then
+                    pcall(function()
+                        local level = game.Players.LocalPlayer.PlayerData.Level.Value
+                        if level >= 1 and <= 50 then
+                            for i,v in pairs(game.workspace.Monster:GetDescendants()) do
+                                if v.Name == "Floppa" then
+                                    repeat task.wait()
+                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame*CFrame.new(0,7.7,0,3,0,0,-3)
+                                        game:GetService('VirtualUser'):CaptureController()
+                                        game:GetService('VirtualUser'):Button1Down(Vector2.new(100,100))
+                                    until v.Humanoid.Health <= 0
+                                end
+                            end
+                        end
+                    end)
+                end
+            end
+        end)
+	end    
+})
