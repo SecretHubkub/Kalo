@@ -12,23 +12,69 @@ local Section = Tab:AddSection({
 })
 
 Tab:AddToggle({
-	Name = "This is a toggle!",
+	Name = "Auto Farm",
 	Default = false,
 	Callback = function(Value)
-		_G.k = Value
+        _G.k = Value
         task.spawn(function()
             while _G.k do task.wait()
                 if _G.k then
                     pcall(function()
                         local level = game.Players.LocalPlayer.PlayerData.Level.Value
-                        if level >= 1 and <= 50 then
-                            for i,v in pairs(game.workspace.Monster:GetDescendants()) do
-                                if v.Name == "Floppa" then
-                                    repeat task.wait()
-                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame*CFrame.new(0,7.7,0,3,0,0,-3)
-                                        game:GetService('VirtualUser'):CaptureController()
-                                        game:GetService('VirtualUser'):Button1Down(Vector2.new(100,100))
-                                    until v.Humanoid.Health <= 0
+                        local te = game.Players.LocalPlayer.Character.HumanoidRootPart
+                        if level >= 1 and level <= 50 then
+                            
+                                te.CFrame = CFrame.new(275.614075, -37.0450363, -632.77179, 0.434889793, 6.64127953e-08, -0.900483668, 8.8764045e-09, 1, 7.80392355e-08, 0.900483668, -4.19315249e-08, 0.434889793)
+                                for i,v in pairs(game.workspace.Monster:GetChildren()) do
+                                    for x,y in pairs(game.workspace.Monster:GetChildren()) do
+                                        for k,c in pairs(game.workspace.Monster:GetChildren()) do
+                                            game.workspace.Monster:FindFirstChild("Floppa")
+                                            if v.Name == "Floppa" then
+                                                if y.Name == "Floppa" then
+                                                    if c.Name == "Floppa" then
+                                                        game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Combat"))
+                                                        repeat task.wait()
+                                                            c.HumanoidRootPart.CFrame = CFrame.new(648.063416, -36.9128151, -590.28241, 0.711560309, -3.62673752e-10, -0.702625036, 1.20296022e-08, 1, 1.16664127e-08, 0.702625036, -1.67536562e-08, 0.711560309)
+                                                            y.HumanoidRootPart.CFrame = CFrame.new(648.063416, -36.9128151, -590.28241, 0.711560309, -3.62673752e-10, -0.702625036, 1.20296022e-08, 1, 1.16664127e-08, 0.702625036, -1.67536562e-08, 0.711560309)
+                                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame*CFrame.new(0,5,0,3,0,0,-3)
+                                                            game:GetService('VirtualUser'):CaptureController()
+                                                            game:GetService('VirtualUser'):Button1Down(Vector2.new(100,100))
+                                                            if sethiddenproperty then
+                                                                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                                            end
+                                                        until v.Humanoid.Health <= 0
+                                                    end
+                                                end
+                                            end
+                                        end
+                                    end
+                                end
+                        elseif level >=50 and  level <= 100 then
+                            local level = game.Players.LocalPlayer.PlayerData.Level.Value
+                            local te = game.Players.LocalPlayer.Character.HumanoidRootPart
+                            te.CFrame = CFrame.new(539.08606, -37.0450401, -912.829041, -0.17704536, 5.49387629e-08, -0.984202683, -7.30473682e-09, 1, 5.71346064e-08, 0.984202683, 1.73047585e-08, -0.17704536)
+                            for i,v in pairs(game.workspace.Monster:GetChildren()) do
+                                for x,y in pairs(game.workspace.Monster:GetChildren()) do
+                                    for k,c in pairs(game.workspace.Monster:GetChildren()) do
+                                        game.workspace.Monster:FindFirstChild("Golden Floppa")
+                                        if v.Name == "Golden Floppa" then
+                                            if y.Name == "Golden Floppa" then
+                                                if c.Name == "Golden Floppa" then
+                                                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Combat"))
+                                                    repeat task.wait()
+                                                        y.HumanoidRootPart.CFrame = CFrame.new(645.980225, -36.947979, -942.2724, 0.531879783, -1.05700522e-07, -0.846819878, -4.23503566e-10, 1, -1.25086558e-07, 0.846819878, 6.68896405e-08, 0.531879783)
+                                                        c.HumanoidRootPart.CFrame = CFrame.new(645.980225, -36.947979, -942.2724, 0.531879783, -1.05700522e-07, -0.846819878, -4.23503566e-10, 1, -1.25086558e-07, 0.846819878, 6.68896405e-08, 0.531879783)
+                                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame*CFrame.new(0,7.7,0,3,0,0,-3)
+                                                        game:GetService('VirtualUser'):CaptureController()
+                                                        game:GetService('VirtualUser'):Button1Down(Vector2.new(100,100))
+                                                        if sethiddenproperty then
+                                                            sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                                        end
+                                                    until v.Humanoid.Health <= 0
+                                                end
+                                            end
+                                        end
+                                    end    
                                 end
                             end
                         end
@@ -36,5 +82,9 @@ Tab:AddToggle({
                 end
             end
         end)
-	end    
+	end
 })
+
+
+
+
